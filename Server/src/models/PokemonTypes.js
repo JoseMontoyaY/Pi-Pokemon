@@ -4,12 +4,6 @@ module.exports = (sequelize) => {
   sequelize.define(
     "PokemonType",
     {
-      // id: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      //   primaryKey: true,
-      // },
-
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -18,3 +12,9 @@ module.exports = (sequelize) => {
     { timestamps: false }
   );
 };
+
+// id: {
+//   type: DataTypes.INTEGER,
+//   allowNull: false,
+//   primaryKey: true,
+// },

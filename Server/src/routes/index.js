@@ -9,18 +9,17 @@ const { json } = require("body-parser");
 
 const router = Router();
 
-//? Get All pokemon or get pokemon by name
+//? GET All pokemon
 router.get("/pokemons", async (req, res) => {
   try {
-    const { name } = req.query;
-    const pokemon = name ? await getPokemonByName(name) : await getPokemons();
+    const pokemon = await getPokemons();
     res.status(200).json(pokemon);
   } catch (error) {
     res.status(500).json({ error: "Unable to obtain data" });
   }
 });
 
-//? Get pokemon by id
+//? GET pokemon by id
 router.get("/pokemons/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -28,6 +27,19 @@ router.get("/pokemons/:id", async (req, res) => {
     res.status(200).json(pokemon);
   } catch (error) {
     res.status(404).json({ error: error.message });
+  }
+});
+
+//? GET pokemons by name
+router.get("/name", async (req, res) => {
+  const { name } = req.query;
+  const searchName = name.toLowerCase();
+
+  try {
+    const pokemon = await getPokemonByName(searchName);
+    res.status(200).json(pokemon);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -44,7 +56,7 @@ router.get("/types", async (req, res) => {
 //? POST pokemon
 router.post("/pokemons", async (req, res) => {
   try {
-    const { name, image, hp, attack, defense, speed, height, weight } =
+    const { name, image, hp, attack, defense, speed, height, weight, types } =
       req.body;
     const newPokemon = await createPokemon({
       name,
@@ -55,6 +67,7 @@ router.post("/pokemons", async (req, res) => {
       speed,
       height,
       weight,
+      types,
     });
     res.status(200).json(newPokemon);
   } catch (error) {

@@ -1,24 +1,26 @@
 const { Pokemon } = require("../db");
 
 const createPokemon = async (pokemonData) => {
-  const { name, image, hp, attack, defense, speed, height, weight } =
+  const { name, image, hp, attack, defense, speed, height, weight, types } =
     pokemonData;
 
-  if (!name || !image || !hp || !attack || !defense)
-    throw Error("Missing data");
+  if (!name || !image || !hp || !attack || !defense) {
+    throw new Error("Missing required data");
+  }
 
-  const newPokemon = await Pokemon.findOrCreate({
-    where: {
-      name,
-      image,
-      hp,
-      attack,
-      defense,
-      speed: speed ? speed : null,
-      height: height ? height : null,
-      weight: weight ? weight : null,
-    },
+  // Create a new Pokemon instance
+  const newPokemon = await Pokemon.create({
+    name,
+    image,
+    hp,
+    attack,
+    defense,
+    speed: speed || null,
+    height: height || null,
+    weight: weight || null,
   });
+
+  newPokemon.addPokemonTypes(types);
 
   return newPokemon;
 };
