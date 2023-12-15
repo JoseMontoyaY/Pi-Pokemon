@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
+import Cards from "./components/cards/Cards";
+import Detail from "./components/detail/Detail";
+import Favorites from "./components/favorites/Favorites";
+import Nav from "./components/nav/Nav";
+import About from "./components/about/About";
+import HomeCards from "./components/homeCards/HomeCards";
+import LoginForm from "./components/loginForm/loginFrom";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [pokemon, setPokemon] = useState([]);
+  const URL = `http://localhost:3001/pokemon/`;
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  // -----> ONSEARCH FUNCTION <-----
+  const onSearch = async (id) => {
+    if (!id) alert("Please enter a pokemon id or name");
+    if (pokemon.find((pokemon) => pokemon.id === parseInt(id)))
+      return alert("This pokemon is already being showned");
+
+    try {
+      const { data } = await axios(`${URL}pokemons/${id}`);
+      const pokemonData = {
+        id: data.id,
+        name: data.name,
+        height: data.height,
+        weight: data.weight,
+        hp: data.stats.find((stat) => stat.stat.name === "hp").base_stat,
+        attack: data.stats.find((stat) => stat.stat.name === "attack")
+          .base_stat,
+        defense: data.stats.find((stat) => stat.stat.name === "defense")
+          .base_stat,
+        speed: data.stats.find((stat) => stat.stat.name === "speed").base_stat,
+        image: data.sprites.other["official-artwork"].front_default,
+      };
+      console.log(pokemonData);
+      setPokemon((oldState) => [...oldState, pokemonData]);
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+  // -----> LOGIN FUNCTION <-----
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <Nav onSearch={onSearch} />
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/homecards" element={<HomeCards />} />
+        <Route path="/home" element={<Cards pokemon={pokemon} />} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
