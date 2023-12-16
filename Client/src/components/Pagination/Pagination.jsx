@@ -1,12 +1,13 @@
-//! import React?
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemon, setCurrentPage } from "../../redux/actions/actions";
 
 const Pagination = () => {
   const dispatch = useDispatch();
-  const { currentPage, totalPages, nextPageUrl, previousPageUrl } = useSelector(
-    (state) => state.reducer
-  );
+
+  const currentPage = useSelector((state) => state.currentPage);
+  const totalPages = useSelector((state) => state.totalPages);
+  const nextPageUrl = useSelector((state) => state.nextPageUrl);
+  const previousPageUrl = useSelector((state) => state.previousPageUrl);
 
   const goToNextPage = () => {
     if (nextPageUrl) {

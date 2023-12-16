@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPokemon } from "../../redux/actions/actions";
 import HomeCard from "../homeCard/HomeCard";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../Pagination/Pagination";
+import style from "./HomeCards.module.css";
 
 const URL = "http://localhost:3001/pokemon/pokemons";
 
@@ -16,48 +18,25 @@ const HomeCards = () => {
   }, [dispatch]);
 
   const handleCardClick = (pokemonInfo) => {
-    navigate("/detail", { pokemonInfo });
+    navigate("/detail", { state: { pokemonInfo } });
   };
 
   return (
     <div>
-      {pokemons.map((pokemon) => (
-        <HomeCard
-          key={pokemon.name}
-          url={pokemon.url}
-          onCardClick={handleCardClick}
-        />
-      ))}
+      <div className={style.container}>
+        {pokemons.map((pokemon) => (
+          <HomeCard
+            key={pokemon.name}
+            url={pokemon.url}
+            onCardClick={handleCardClick}
+          />
+        ))}
+      </div>
+      <div>
+        <Pagination />
+      </div>
     </div>
   );
 };
 
 export default HomeCards;
-
-// import { useSelector } from "react-redux";
-// import HomeCard from "../homeCard/HomeCard";
-// import { useNavigate } from "react-router-dom";
-
-// const HomeCards = () => {
-//   const pokemons = useSelector((state) => state.pokemons);
-//   console.log(pokemons);
-//   const navigate = useNavigate();
-
-//   const handleCardClick = (pokemonInfo) => {
-//     navigate("/detail", { pokemonInfo });
-//   };
-
-//   return (
-//     <div>
-//       {pokemons.map((pokemon) => (
-//         <HomeCard
-//           key={pokemon.name}
-//           url={pokemon.url}
-//           onCardClick={handleCardClick}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default HomeCards;

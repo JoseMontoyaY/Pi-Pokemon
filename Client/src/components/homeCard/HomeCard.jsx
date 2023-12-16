@@ -1,7 +1,15 @@
-//! React?
 import { useState, useEffect } from "react";
+import style from "./HomeCard.module.css";
+const borderClasses = [style.borderYellow, style.borderBlue, style.borderRed];
 
 const HomeCard = ({ url, onCardClick }) => {
+  //*? random border color logic
+  const getRandomBorderClass = () => {
+    const randomIndex = Math.floor(Math.random() * borderClasses.length);
+    return borderClasses[randomIndex];
+  };
+  const borderClass = getRandomBorderClass();
+
   const [basicInfo, setBasicInfo] = useState({
     image: "",
     name: "",
@@ -27,10 +35,19 @@ const HomeCard = ({ url, onCardClick }) => {
   }, [url]);
 
   return (
-    <div className="pokemon-card" onClick={() => onCardClick(basicInfo)}>
-      <img src={basicInfo.image} alt={basicInfo.name} />
-      <h3>{basicInfo.name}</h3>
-      <p>Height: {basicInfo.height}</p>
+    <div className={style.shadowContainer}>
+      <div
+        className={`${style.cardContainer} ${borderClass}`}
+        onClick={() => onCardClick(basicInfo)}>
+        <div className={style.cardImage}>
+          <img src={basicInfo.image} alt={basicInfo.name} />
+        </div>
+
+        <div className={style.cardInfo}>
+          <h3>{basicInfo.name}</h3>
+          <p>Height: {basicInfo.height}</p>
+        </div>
+      </div>
     </div>
   );
 };

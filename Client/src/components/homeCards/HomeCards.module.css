@@ -1,0 +1,7 @@
+.container {
+    border: solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: center;
+}

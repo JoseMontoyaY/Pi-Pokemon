@@ -7,8 +7,8 @@ import Detail from "./components/detail/Detail";
 import Favorites from "./components/favorites/Favorites";
 import Nav from "./components/nav/Nav";
 import About from "./components/about/About";
-import HomeCards from "./components/homeCards/HomeCards";
-import LoginForm from "./components/loginForm/loginFrom";
+import Home from "./components/home/Home";
+import LandingPage from "./components/landing/Landing";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -48,11 +48,11 @@ function App() {
 
   return (
     <div className="App">
-      <Nav onSearch={onSearch} />
+      {pathname !== "/" && <Nav onSearch={onSearch} />}
       <Routes>
-        <Route path="/" element={<LoginForm />} />
-        <Route path="/homecards" element={<HomeCards />} />
-        <Route path="/home" element={<Cards pokemon={pokemon} />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/search" element={<Cards pokemon={pokemon} />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/about" element={<About />} />

@@ -4,7 +4,8 @@ import style from "./Nav.module.css";
 
 export default function Nav({ onSearch }) {
   return (
-    <div>
+    <div className={style.container}>
+      <SearchBar onSearch={onSearch} />
       <Link to="/home">
         <span>Home</span>
       </Link>
@@ -14,7 +15,6 @@ export default function Nav({ onSearch }) {
       <Link to="/about">
         <span>About</span>
       </Link>
-      <SearchBar onSearch={onSearch} />
     </div>
   );
 }
