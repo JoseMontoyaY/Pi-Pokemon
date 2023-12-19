@@ -14,8 +14,10 @@ const HomeCards = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchPokemon(URL));
-  }, [dispatch]);
+    if (pokemons.length === 0) {
+      dispatch(fetchPokemon(URL));
+    }
+  }, []);
 
   const handleCardClick = (pokemonInfo) => {
     navigate("/detail", { state: { pokemonInfo } });

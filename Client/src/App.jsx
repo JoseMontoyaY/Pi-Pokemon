@@ -9,6 +9,7 @@ import Nav from "./components/nav/Nav";
 import About from "./components/about/About";
 import Home from "./components/home/Home";
 import LandingPage from "./components/landing/Landing";
+import CreateFrom from "./components/createForm/CreateForm";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -56,6 +57,7 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/about" element={<About />} />
+        <Route path="/create" element={<CreateFrom />} />
       </Routes>
     </div>
   );

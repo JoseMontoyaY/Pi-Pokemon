@@ -8,7 +8,6 @@ const createPokemon = async (pokemonData) => {
     throw new Error("Missing required data");
   }
 
-  // Create a new Pokemon instance
   const newPokemon = await Pokemon.create({
     name,
     image,
