@@ -7,25 +7,26 @@ import {
 } from "./actions/actionsType";
 
 const initialState = {
-  pokemons: [],
+  pokemons: [], // This will now hold detailed information for each Pokemon
   currentPage: 1,
   totalPages: 0,
   nextPageUrl: null,
   previousPageUrl: null,
 };
 
-const reducer = (state = initialState, { type, payload }) => {
-  switch (type) {
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
     case FETCH_POKEMONS:
-      return { ...state, pokemons: payload };
+      // Updating the pokemons state with detailed Pokemon information
+      return { ...state, pokemons: action.payload };
     case SET_CURRENT_PAGE:
-      return { ...state, currentPage: payload };
+      return { ...state, currentPage: action.payload };
     case SET_TOTAL_PAGES:
-      return { ...state, totalPages: payload };
+      return { ...state, totalPages: action.payload };
     case SET_NEXT_PAGE:
-      return { ...state, nextPageUrl: payload };
+      return { ...state, nextPageUrl: action.payload };
     case SET_PREVIOUS_PAGE:
-      return { ...state, previousPageUrl: payload };
+      return { ...state, previousPageUrl: action.payload };
     default:
       return state;
   }

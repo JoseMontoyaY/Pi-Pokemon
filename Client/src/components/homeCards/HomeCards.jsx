@@ -17,10 +17,10 @@ const HomeCards = () => {
     if (pokemons.length === 0) {
       dispatch(fetchPokemon(URL));
     }
-  }, []);
+  }, [dispatch]);
 
-  const handleCardClick = (pokemonInfo) => {
-    navigate("/detail", { state: { pokemonInfo } });
+  const handleCardClick = (pokemonId) => {
+    navigate(`/detail/${pokemonId}`);
   };
 
   return (
@@ -28,9 +28,9 @@ const HomeCards = () => {
       <div className={style.container}>
         {pokemons.map((pokemon) => (
           <HomeCard
-            key={pokemon.name}
-            url={pokemon.url}
-            onCardClick={handleCardClick}
+            key={pokemon.id}
+            pokemon={pokemon}
+            onCardClick={() => handleCardClick(pokemon.id)}
           />
         ))}
       </div>

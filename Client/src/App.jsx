@@ -54,7 +54,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<Cards pokemon={pokemon} />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:pokemonId" element={<Detail />} />{" "}
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/about" element={<About />} />
         <Route path="/create" element={<CreateFrom />} />
