@@ -3,17 +3,20 @@ import style from "./HomeCard.module.css";
 const borderClasses = [style.borderYellow, style.borderBlue, style.borderRed];
 
 const HomeCard = ({ pokemon, onCardClick }) => {
+  //Random Broder class
   const getRandomBorderClass = () => {
     const randomIndex = Math.floor(Math.random() * borderClasses.length);
     return borderClasses[randomIndex];
   };
 
   const borderClass = getRandomBorderClass();
+  // - - - - - - - - - - -
 
   return (
     <div className={style.shadowContainer} onClick={() => onCardClick(pokemon)}>
       <div className={`${style.cardContainer} ${borderClass}`}>
         {pokemon.name && <h3>{pokemon.name}</h3>}
+        {pokemon.attack && <h3>{pokemon.attack}</h3>}
         {pokemon.image && (
           <div className={style.cardImage}>
             <img src={pokemon.image} alt={pokemon.name} />

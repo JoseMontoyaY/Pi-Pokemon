@@ -4,25 +4,33 @@ import {
   SET_TOTAL_PAGES,
   SET_NEXT_PAGE,
   SET_PREVIOUS_PAGE,
+  SET_FILTER,
+  SET_SORT,
 } from "./actionsType";
 
 import axios from "axios";
 
-const URL = "http://localhost:3001/pokemon/pokemons";
+// const URL = "http://localhost:3001/pokemon/pokemons";
+
+const ITEMS_PER_PAGE = 12; // Number of items per page
 
 // Fetch Pokemon
-export const fetchPokemon = (url) => {
+export const fetchPokemon = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(url);
-      dispatch(setTotalPages(Math.ceil(data.count / 12)));
-      dispatch(setNextPage(data.next));
-      dispatch(setPreviousPage(data.previous));
+      // First request to get the list of all pokemons
+      const response = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon?limit=200"
+      );
+      const pokemonList = response.data.results;
 
+      dispatch(setTotalPages(Math.ceil(response.data.count / 200)));
+
+      // Second request to get detailed information for each pokemon
       const detailedPokemons = await Promise.all(
-        data.results.map(async (pokemon) => {
-          const response = await axios(pokemon.url);
-          const data = response.data;
+        pokemonList.map(async (pokemon) => {
+          const detailResponse = await axios.get(pokemon.url);
+          const data = detailResponse.data;
 
           return {
             id: data.id,
@@ -52,26 +60,24 @@ export const fetchPokemon = (url) => {
   };
 };
 
-// Set current page
-export const setCurrentPage = (page) => ({
-  type: SET_CURRENT_PAGE,
-  payload: page,
-});
-
 // Set total pages
 export const setTotalPages = (totalPages) => ({
   type: SET_TOTAL_PAGES,
   payload: totalPages,
 });
 
-// Set next page
-export const setNextPage = (nextPageUrl) => ({
-  type: SET_NEXT_PAGE,
-  payload: nextPageUrl,
+export const setCurrentPage = (page) => ({
+  type: "SET_CURRENT_PAGE",
+  payload: page,
 });
 
-// Set previous page
-export const setPreviousPage = (prevPageUrl) => ({
-  type: SET_PREVIOUS_PAGE,
-  payload: prevPageUrl,
+export const setFilter = (filter) => ({
+  type: SET_FILTER,
+  payload: filter,
+});
+
+// Set sort
+export const setSort = (sort) => ({
+  type: SET_SORT,
+  payload: sort,
 });

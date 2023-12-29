@@ -1,37 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemon, setCurrentPage } from "../../redux/actions/actions";
+import { setCurrentPage } from "../../redux/actions/actions";
 
 const Pagination = () => {
   const dispatch = useDispatch();
-
   const currentPage = useSelector((state) => state.currentPage);
   const totalPages = useSelector((state) => state.totalPages);
-  const nextPageUrl = useSelector((state) => state.nextPageUrl);
-  const previousPageUrl = useSelector((state) => state.previousPageUrl);
+
+  const goToPage = (page) => {
+    dispatch(setCurrentPage(page));
+  };
 
   const goToNextPage = () => {
-    if (nextPageUrl) {
-      dispatch(fetchPokemon(nextPageUrl));
-      dispatch(setCurrentPage(currentPage + 1));
+    if (currentPage < totalPages) {
+      goToPage(currentPage + 1);
     }
   };
 
   const goToPreviousPage = () => {
-    if (previousPageUrl) {
-      dispatch(fetchPokemon(previousPageUrl));
-      dispatch(setCurrentPage(currentPage - 1));
+    if (currentPage > 1) {
+      goToPage(currentPage - 1);
     }
   };
 
   return (
     <div>
-      <button onClick={goToPreviousPage} disabled={!previousPageUrl}>
+      <button onClick={goToPreviousPage} disabled={currentPage <= 1}>
         Previous
       </button>
       <span>
         Page {currentPage} of {totalPages}
       </span>
-      <button onClick={goToNextPage} disabled={!nextPageUrl}>
+      <button onClick={goToNextPage} disabled={currentPage >= totalPages}>
         Next
       </button>
     </div>

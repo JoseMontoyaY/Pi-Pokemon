@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./CreateForm.module.css";
+import { validateName, validateStat } from "./validation";
 
 const pokemonTypes = [
   { id: 1, name: "normal" },
@@ -41,12 +42,10 @@ const CreateForm = () => {
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
-
     if (name === "types") {
       let newTypes = checked
         ? [...pokemon.types, value]
         : pokemon.types.filter((type) => type !== value);
-
       setPokemon({ ...pokemon, types: newTypes });
     } else {
       setPokemon({ ...pokemon, [name]: value });
@@ -55,6 +54,25 @@ const CreateForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Name validation
+    const nameError = validateName(pokemon.name);
+    if (nameError) {
+      alert(nameError);
+      return;
+    }
+
+    // Stats validation
+    const stats = ["hp", "attack", "defense", "speed", "height", "weight"];
+    for (let stat of stats) {
+      const statError = validateStat(pokemon[stat], stat);
+      if (statError) {
+        alert(statError);
+        return;
+      }
+    }
+
+    // Payload preparation
     const payload = {
       ...pokemon,
       types: pokemon.types.map(
@@ -62,6 +80,7 @@ const CreateForm = () => {
       ),
     };
 
+    // API request
     try {
       const response = await axios.post(
         "http://localhost:3001/pokemon/pokemons",
@@ -91,6 +110,7 @@ const CreateForm = () => {
 
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
+  // JSX for the form
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
@@ -187,7 +207,6 @@ const CreateForm = () => {
             </div>
           )}
         </div>
-
         <button type="submit" className={styles.submitButton}>
           Create Pokémon
         </button>

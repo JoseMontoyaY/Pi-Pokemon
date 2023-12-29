@@ -1,5 +1,5 @@
 const axios = require("axios");
-const URL_BASE = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=12";
+const URL_BASE = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=200";
 // const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemons = async () => {
