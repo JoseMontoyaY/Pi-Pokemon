@@ -19,30 +19,34 @@ function App() {
   const navigate = useNavigate();
 
   // -----> ONSEARCH FUNCTION <-----
-  const onSearch = async (id) => {
-    if (!id) alert("Please enter a pokemon id or name");
-    if (pokemon.find((pokemon) => pokemon.id === parseInt(id)))
-      return alert("This pokemon is already being showned");
+  const onSearch = async (searchTerm) => {
+    if (!searchTerm) return alert("Please enter a pokemon id or name");
+
+    let url = isNaN(searchTerm)
+      ? `${URL}/name?name=${searchTerm}`
+      : `${URL}pokemons/${searchTerm}`;
 
     try {
-      const { data } = await axios(`${URL}pokemons/${id}`);
-      const pokemonData = {
-        id: data.id,
-        name: data.name,
-        height: data.height,
-        weight: data.weight,
-        hp: data.stats.find((stat) => stat.stat.name === "hp").base_stat,
-        attack: data.stats.find((stat) => stat.stat.name === "attack")
-          .base_stat,
-        defense: data.stats.find((stat) => stat.stat.name === "defense")
-          .base_stat,
-        speed: data.stats.find((stat) => stat.stat.name === "speed").base_stat,
-        image: data.sprites.other["official-artwork"].front_default,
-      };
-      console.log(pokemonData);
-      setPokemon((oldState) => [...oldState, pokemonData]);
+      const { data } = await axios(url);
+
+      // Check if data is an array (multiple results) or an object (single result)
+      if (Array.isArray(data)) {
+        // Iterate over the array and add each Pokemon individually
+        data.forEach((pokemonData) => {
+          if (!pokemon.some((p) => p.id === pokemonData.id)) {
+            setPokemon((oldState) => [...oldState, pokemonData]);
+          }
+        });
+      } else {
+        // Single result, add it if not already in state
+        if (!pokemon.some((p) => p.id === data.id)) {
+          setPokemon((oldState) => [...oldState, data]);
+        } else {
+          alert("This pokemon is already being shown");
+        }
+      }
     } catch (error) {
-      alert(error.response.data);
+      alert(error.response.data.message);
     }
   };
   // -----> LOGIN FUNCTION <-----

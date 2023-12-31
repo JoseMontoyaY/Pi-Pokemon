@@ -133,7 +133,7 @@ const CreateForm = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="hp"
           placeholder="HP"
           value={pokemon.hp}
