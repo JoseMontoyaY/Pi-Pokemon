@@ -31,14 +31,12 @@ function App() {
 
       // Check if data is an array (multiple results) or an object (single result)
       if (Array.isArray(data)) {
-        // Iterate over the array and add each Pokemon individually
         data.forEach((pokemonData) => {
           if (!pokemon.some((p) => p.id === pokemonData.id)) {
             setPokemon((oldState) => [...oldState, pokemonData]);
           }
         });
       } else {
-        // Single result, add it if not already in state
         if (!pokemon.some((p) => p.id === data.id)) {
           setPokemon((oldState) => [...oldState, data]);
         } else {

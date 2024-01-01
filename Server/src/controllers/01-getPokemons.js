@@ -7,7 +7,8 @@ const getPokemons = async () => {
   const apiResponse = await axios(URL_BASE);
   const apiPokemons = apiResponse.data.results;
 
-  const detailedPokemons = await Promise.all(
+  // Fetch and process API Pokemons
+  const detailedApiPokemons = await Promise.all(
     apiPokemons.map(async (pokemon) => {
       const detailResponse = await axios.get(pokemon.url);
       const data = detailResponse.data;
@@ -25,10 +26,12 @@ const getPokemons = async () => {
         speed: data.stats.find((stat) => stat.stat.name === "speed").base_stat,
         image: data.sprites.other["official-artwork"].front_default,
         type: data.types.map((type) => type.type.name),
+        source: "api", // Adding the source property
       };
     })
   );
 
+  // Fetch and process DB Pokemons
   const dbPokemons = await Pokemon.findAll({
     include: [
       {
@@ -38,15 +41,17 @@ const getPokemons = async () => {
     ],
   });
 
-  const simplifiedDbPokemons = dbPokemons.map((pokemon) => {
+  const detailedDbPokemons = dbPokemons.map((pokemon) => {
     const { PokemonTypes, ...rest } = pokemon.get({ plain: true });
     return {
       ...rest,
-      type: PokemonTypes.map((type) => type.name), // Ensure this matches the API structure
+      type: PokemonTypes.map((type) => type.name),
+      source: "db", // Adding the source property
     };
   });
 
-  const combinedPokemons = [...detailedPokemons, ...simplifiedDbPokemons];
+  // Combining API and DB Pokemons
+  const combinedPokemons = [...detailedApiPokemons, ...detailedDbPokemons];
 
   return {
     combinedPokemons: combinedPokemons,

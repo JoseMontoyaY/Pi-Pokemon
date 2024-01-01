@@ -1,8 +1,9 @@
 import Card from "../card/Card";
+import style from "./Cards.module.css";
 
 export default function Cards({ pokemon }) {
   return (
-    <div>
+    <div className={style.container}>
       {pokemon.map((pokemon) => (
         <Card
           key={pokemon.id}

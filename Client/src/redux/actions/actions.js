@@ -3,13 +3,14 @@ import {
   SET_TOTAL_PAGES,
   SET_FILTER,
   SET_SORT,
+  SET_BORDER_COLOR,
 } from "./actionsType";
 
 import axios from "axios";
 
 // const URL = "http://localhost:3001/pokemon/pokemons";
 
-const ITEMS_PER_PAGE = 12; // Number of items per page
+const ITEMS_PER_PAGE = 12;
 
 // Fetch Pokemon
 export const fetchPokemon = () => {
@@ -53,4 +54,10 @@ export const setFilter = (filter) => ({
 export const setSort = (sort) => ({
   type: SET_SORT,
   payload: sort,
+});
+
+// Set Border Color
+export const setBorderColor = (pokemonId, borderColor) => ({
+  type: SET_BORDER_COLOR,
+  payload: { pokemonId, borderColor },
 });

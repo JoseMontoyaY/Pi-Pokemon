@@ -1,16 +1,32 @@
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setBorderColor } from "../../redux/actions/actions";
 import style from "./HomeCard.module.css";
 
-const borderClasses = [style.borderYellow, style.borderBlue, style.borderRed];
-
 const HomeCard = ({ pokemon, onCardClick }) => {
-  //Random Broder class
+  const dispatch = useDispatch();
+  const borderColors = useSelector((state) => state.borderColors);
+
+  // Function to get a random border class
   const getRandomBorderClass = () => {
+    const borderClasses = [
+      style.borderYellow,
+      style.borderBlue,
+      style.borderRed,
+    ];
     const randomIndex = Math.floor(Math.random() * borderClasses.length);
     return borderClasses[randomIndex];
   };
 
-  const borderClass = getRandomBorderClass();
-  // - - - - - - - - - - -
+  useEffect(() => {
+    let borderClass = borderColors[pokemon.id];
+    if (!borderClass) {
+      borderClass = getRandomBorderClass();
+      dispatch(setBorderColor(pokemon.id, borderClass));
+    }
+  }, [pokemon.id, borderColors, dispatch]);
+
+  const borderClass = borderColors[pokemon.id];
 
   return (
     <div className={style.shadowContainer} onClick={() => onCardClick(pokemon)}>

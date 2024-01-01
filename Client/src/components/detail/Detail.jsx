@@ -9,6 +9,9 @@ const Detail = () => {
     state.pokemons.find((pokemon) => pokemon.id.toString() === pokemonId)
   );
 
+  const borderColors = useSelector((state) => state.borderColors);
+  const borderColorClass = borderColors[pokemonId];
+
   if (!pokemonInfo) {
     return <div className={style.loading}>Loading Pokémon details...</div>;
   }
@@ -19,7 +22,7 @@ const Detail = () => {
   return (
     <div className={style.componentContainer}>
       <div className={style.shadowContainer}>
-        <div className={style.cardContainer}>
+        <div className={`${style.cardContainer} ${borderColorClass}`}>
           <h3>{name}</h3>
           <div className={style.cardImage}>
             <img src={image} alt={name} />

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPokemon } from "../../redux/actions/actions";
+import { fetchPokemon, setTotalPages } from "../../redux/actions/actions"; // Import setTotalPages action
 import HomeCard from "../homeCard/HomeCard";
 import Pagination from "../Pagination/Pagination";
 import Filter from "../filter/Filter";
@@ -13,6 +13,7 @@ const ITEMS_PER_PAGE = 12;
 const HomeCards = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [sourceFilter, setSourceFilter] = useState("");
 
   const pokemons = useSelector((state) => state.pokemons);
   const filter = useSelector((state) => state.filter);
@@ -25,12 +26,20 @@ const HomeCards = () => {
     }
   }, [dispatch, pokemons.length]);
 
-  // Apply Filter
-  const filteredPokemons = filter
-    ? pokemons.filter((pokemon) => pokemon.type.includes(filter))
-    : pokemons;
+  const handleSourceFilterChange = (newSourceFilter) => {
+    setSourceFilter(newSourceFilter);
+  };
 
-  // Apply Sort
+  let filteredPokemons = pokemons.filter((pokemon) =>
+    filter ? pokemon.type.includes(filter) : true
+  );
+
+  if (sourceFilter) {
+    filteredPokemons = filteredPokemons.filter(
+      (pokemon) => pokemon.source === sourceFilter
+    );
+  }
+
   const sortedPokemons = [...filteredPokemons].sort((a, b) => {
     switch (sort) {
       case "name-asc":
@@ -46,7 +55,11 @@ const HomeCards = () => {
     }
   });
 
-  // Pagination Logic
+  useEffect(() => {
+    const newTotalPages = Math.ceil(filteredPokemons.length / ITEMS_PER_PAGE);
+    dispatch(setTotalPages(newTotalPages));
+  }, [filteredPokemons, dispatch]);
+
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedPokemons = sortedPokemons.slice(
     startIndex,
@@ -59,7 +72,7 @@ const HomeCards = () => {
 
   return (
     <div>
-      <Filter />
+      <Filter onSourceFilterChange={handleSourceFilterChange} />
       <Sort />
       <div className={style.container}>
         {paginatedPokemons.map((pokemon) => (

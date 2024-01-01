@@ -4,6 +4,7 @@ import {
   SET_TOTAL_PAGES,
   SET_FILTER,
   SET_SORT,
+  SET_BORDER_COLOR,
 } from "./actions/actionsType";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   totalPages: 0,
   filter: null,
   sort: null,
+  borderColors: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +28,14 @@ const reducer = (state = initialState, action) => {
       return { ...state, filter: action.payload };
     case SET_SORT:
       return { ...state, sort: action.payload };
+    case SET_BORDER_COLOR:
+      return {
+        ...state,
+        borderColors: {
+          ...state.borderColors,
+          [action.payload.pokemonId]: action.payload.borderColor,
+        },
+      };
     default:
       return state;
   }
