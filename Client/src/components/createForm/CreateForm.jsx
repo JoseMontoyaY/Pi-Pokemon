@@ -186,19 +186,24 @@ const CreateForm = () => {
             Select Types
           </div>
           {showDropdown && (
-            <div className={styles.dropdownContent}>
-              {pokemonTypes.map((type) => (
-                <label key={type.id}>
-                  <input
-                    type="checkbox"
-                    value={type.name}
-                    checked={pokemon.types.includes(type.name)}
-                    onChange={handleChange}
-                    name="types"
-                  />
-                  {type.name}
-                </label>
-              ))}
+            <div
+              className={`${styles.dropdownContent} ${
+                showDropdown ? styles.show : ""
+              }`}>
+              <div className={styles.dropdownGrid}>
+                {pokemonTypes.map((type) => (
+                  <label key={type.id}>
+                    <input
+                      type="checkbox"
+                      value={type.name}
+                      checked={pokemon.types.includes(type.name)}
+                      onChange={handleChange}
+                      name="types"
+                    />
+                    {type.name}
+                  </label>
+                ))}
+              </div>
             </div>
           )}
         </div>

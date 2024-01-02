@@ -12,35 +12,43 @@ const Detail = () => {
   const borderColors = useSelector((state) => state.borderColors);
   const borderColorClass = borderColors[pokemonId];
 
-  if (!pokemonInfo) {
-    return <div className={style.loading}>Loading Pokémon details...</div>;
-  }
-
   const { id, name, hp, attack, defense, speed, height, weight, image, type } =
     pokemonInfo;
-
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   return (
     <div className={style.componentContainer}>
-      <div className={style.shadowContainer}>
-        <div className={`${style.cardContainer} ${borderColorClass}`}>
-          <h3>{name}</h3>
-          <div className={style.cardImage}>
-            <img src={image} alt={name} />
-          </div>
-          <div className={style.cardInfo}>
-            <b>ID:</b> <span>{id}</span>
-            <b>HP:</b> <span>{hp}</span>
-            <b>Attack:</b> <span>{attack}</span>
-            <b>Defense:</b> <span>{defense}</span>
-            <b>Speed:</b> <span>{speed}</span>
-            <b>Height:</b> <span>{height} dm</span>
-            <b>Weight:</b> <span>{weight} hg</span>
-            <b>Types:</b>
-            <ul>
-              {type.map((t, index) => (
-                <li key={index}>{t}</li>
-              ))}
-            </ul>
+      <div className={`${style.cardContainer} ${borderColorClass}`}>
+        <div className={style.cardImage}>
+          <img src={image} alt={name} />
+        </div>
+
+        <div className={style.cardInfo}>
+          <div className={style.cardName}>{capitalize(name)}</div>
+          <div className={style.cardDetails}>
+            <p>
+              <b>Id:</b> {id}
+            </p>
+            <p>
+              <b>Attack:</b> {attack}
+            </p>
+            <p>
+              <b>Defense:</b> {defense}
+            </p>
+            <p>
+              <b>Speed:</b> {speed}
+            </p>
+            <p>
+              <b>Height:</b> {height}
+            </p>
+            <p>
+              <b>Weight:</b> {weight}
+            </p>
+            <div>
+              <b>Types: </b>
+              <span className={style.typeList}>{type.join(" - ")}</span>
+            </div>
           </div>
         </div>
       </div>

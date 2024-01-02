@@ -13,7 +13,16 @@ export default function Card({
   image,
   onRemovePokemon,
 }) {
-  const borderClasses = [style.borderYellow, style.borderBlue, style.borderRed];
+  const borderClasses = [
+    style.borderYellow,
+    style.borderBlue,
+    style.borderRed,
+    style.borderGreen,
+    style.borderGrey,
+    style.borderPurple,
+    style.borderPink,
+    style.borderGold,
+  ];
   const [borderClass, setBorderClass] = useState("");
   const getRandomBorderClass = () => {
     const randomIndex = Math.floor(Math.random() * borderClasses.length);
@@ -26,41 +35,40 @@ export default function Card({
   const handleRemove = () => {
     onRemovePokemon(id);
   };
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   return (
-    <div className={style.shadowContainer}>
-      <div className={`${style.cardContainer} ${borderClass}`}>
-        <button className={style.removeButton} onClick={handleRemove}>
-          X
-        </button>
-        <p>
-          <b>Name:</b> {name}
-        </p>
-        <p>
-          <b>Attack:</b> {attack}
-        </p>
-
-        <div className={style.cardImage}>
-          <img src={image} alt={name} />
-        </div>
-
-        <div className={style.cardInfo}>
+    <div className={`${style.cardContainer} ${borderClass}`}>
+      <button className={style.removeButton} onClick={handleRemove}>
+        X
+      </button>
+      <div className={style.cardImage}>
+        <img src={image} alt={name} />
+      </div>
+      <div className={style.cardInfo}>
+        <div className={style.cardName}>{capitalize(name)}</div>
+        <div className={style.cardDetails}>
           <p>
-            <b>Id:</b> {id}
+            <b>Id: </b> {id}
           </p>
           <p>
-            <b>HP:</b> {hp}
+            <b>HP: </b> {hp}
           </p>
           <p>
-            <b>Defense:</b> {defense}
+            <b>Attack: </b> {attack}
           </p>
           <p>
-            <b>Speed:</b> {speed}
+            <b>Defense: </b> {defense}
           </p>
           <p>
-            <b>Height:</b> {height}
+            <b>Speed: </b> {speed}
           </p>
           <p>
-            <b>Weight:</b> {weight}
+            <b>Height: </b> {height}
+          </p>
+          <p>
+            <b>Weight: </b> {weight}
           </p>
         </div>
       </div>

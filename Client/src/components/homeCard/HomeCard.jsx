@@ -13,6 +13,11 @@ const HomeCard = ({ pokemon, onCardClick }) => {
       style.borderYellow,
       style.borderBlue,
       style.borderRed,
+      style.borderGreen,
+      style.borderGrey,
+      style.borderPurple,
+      style.borderPink,
+      style.borderGold,
     ];
     const randomIndex = Math.floor(Math.random() * borderClasses.length);
     return borderClasses[randomIndex];
@@ -32,24 +37,23 @@ const HomeCard = ({ pokemon, onCardClick }) => {
   }
 
   return (
-    <div className={style.shadowContainer} onClick={() => onCardClick(pokemon)}>
-      <div className={`${style.cardContainer} ${borderClass}`}>
-        <div className={style.cardImage}>
-          <img src={pokemon.image} alt={pokemon.name} />
-        </div>
+    <div
+      className={`${style.cardContainer} ${borderClass}`}
+      onClick={() => onCardClick(pokemon)}>
+      <div className={style.cardImage}>
+        <img src={pokemon.image} alt={pokemon.name} />
+      </div>
 
-        <div className={style.cardInfo}>
-          <h3>{capitalize(pokemon.name)}</h3>
+      <div className={style.cardInfo}>
+        <div className={style.cardName}>{capitalize(pokemon.name)}</div>
+        <div className={style.cardDetails}>
           <p>
-            <b>Attack: </b>
-            {pokemon.attack}
+            <b>Attack:</b> {pokemon.attack}
           </p>
-          <b>Types:</b>
-          <ul>
-            {pokemon.type.map((type) => (
-              <li key={type}>{type}</li>
-            ))}
-          </ul>
+          <div>
+            <b>Types: </b>
+            <span className={style.typeList}>{pokemon.type.join(" - ")}</span>
+          </div>
         </div>
       </div>
     </div>

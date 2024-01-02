@@ -13,12 +13,7 @@
 .title {
     margin-top: 0;
     margin-bottom: 20px;
-}
-
-.buttonContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    color: #333;
 }
 
 .button {

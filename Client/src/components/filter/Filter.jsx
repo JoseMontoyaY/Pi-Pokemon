@@ -42,7 +42,10 @@ const Filter = ({ onSourceFilterChange }) => {
     <div className={style.container}>
       <div>
         <label htmlFor="pokemon-type-filter">Filter by Type:</label>
-        <select id="pokemon-type-filter" onChange={handleFilterChange}>
+        <select
+          className={style.select}
+          id="pokemon-type-filter"
+          onChange={handleFilterChange}>
           <option value="">All</option>
           {pokemonTypes.map((type) => (
             <option key={type} value={type}>
@@ -53,7 +56,10 @@ const Filter = ({ onSourceFilterChange }) => {
       </div>
       <div>
         <label htmlFor="pokemon-source-filter">Filter by Source:</label>
-        <select id="pokemon-source-filter" onChange={handleSourceChange}>
+        <select
+          className={style.select}
+          id="pokemon-source-filter"
+          onChange={handleSourceChange}>
           <option value="">All</option>
           <option value="api">API</option>
           <option value="db">Database</option>

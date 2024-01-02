@@ -1,0 +1,40 @@
+.container {
+    border: 1px solid #ddd;
+    backdrop-filter: blur(1px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 4%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container h1 {
+    color: #333;
+}
+
+.pokemonLogo {
+    width: 20vw;
+    height: auto;
+}
+
+.button {
+    margin: 0 1%;
+    background-color: #ffffff;
+    color: #e92758;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #ffde59;
+}

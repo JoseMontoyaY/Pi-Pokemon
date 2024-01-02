@@ -17,7 +17,10 @@ const Sort = () => {
     <div className={style.container}>
       <div>
         <label htmlFor="name-sort">Sort by Name:</label>
-        <select id="name-sort" onChange={handleNameSortChange}>
+        <select
+          className={style.select}
+          id="name-sort"
+          onChange={handleNameSortChange}>
           <option value="">Default</option>
           <option value="name-asc">Ascending</option>
           <option value="name-desc">Descending</option>
@@ -26,7 +29,10 @@ const Sort = () => {
 
       <div>
         <label htmlFor="attack-sort">Sort by Attack:</label>
-        <select id="attack-sort" onChange={handleAttackSortChange}>
+        <select
+          className={style.select}
+          id="attack-sort"
+          onChange={handleAttackSortChange}>
           <option value="">Default</option>
           <option value="attack-asc">Ascending</option>
           <option value="attack-desc">Descending</option>

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../redux/actions/actions";
+import style from "./Pagination.module.css";
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -23,14 +24,20 @@ const Pagination = () => {
   };
 
   return (
-    <div>
-      <button onClick={goToPreviousPage} disabled={currentPage <= 1}>
+    <div className={style.container}>
+      <button
+        className={style.button}
+        onClick={goToPreviousPage}
+        disabled={currentPage <= 1}>
         Previous
       </button>
       <span>
         Page {currentPage} of {totalPages}
       </span>
-      <button onClick={goToNextPage} disabled={currentPage >= totalPages}>
+      <button
+        className={style.button}
+        onClick={goToNextPage}
+        disabled={currentPage >= totalPages}>
         Next
       </button>
     </div>

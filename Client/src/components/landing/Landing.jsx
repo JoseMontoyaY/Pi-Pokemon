@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import style from "./Landing.module.css";
+import pokemonLogo from "../../assets/pokemon-logo.svg";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -8,10 +10,12 @@ const LandingPage = () => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
+      <img className={style.pokemonLogo} src={pokemonLogo} alt="pokemon logo" />
       <h1>Welcome to the Pokemon App!</h1>
-      <button onClick={goToHomePage}>Log in</button>
-      <button>Create account</button>
+      <button className={style.button} onClick={goToHomePage}>
+        Enter
+      </button>
     </div>
   );
 };

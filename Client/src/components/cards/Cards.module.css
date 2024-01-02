@@ -1,7 +1,8 @@
 .container {
-    border: solid blue;
     display: flex;
-    flex-wrap: wrap;
-    height: fit-content;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+
 }

@@ -1,34 +1,98 @@
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+    border: 1px solid #ddd;
+}
+
+.inputField {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Avenir', sans-serif;
+    font-size: 1em;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 .dropdownContent {
     display: block;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 320px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .dropdownContent label {
     color: black;
-    padding: 12px 16px;
+    padding: 8px 10px;
     text-decoration: none;
     display: block;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.dropdownGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
 }
 
 .dropdownButton {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #ffffff;
+    color: #e92758;
     padding: 16px;
     font-size: 16px;
-    border: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     cursor: pointer;
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+    width: 80%;
+    margin: 10px auto;
+    transition: background-color 0.3s ease;
 }
 
 .dropdownButton:hover,
 .dropdownButton:focus {
-    background-color: #3e8e41;
+    background-color: #ffde59;
+}
+
+.submitButton {
+    background-color: #ffffff;
+    color: #e92758;
+    padding: 16px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover,
+.submitButton:focus {
+    background-color: #ffde59;
 }

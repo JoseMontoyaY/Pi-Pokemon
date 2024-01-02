@@ -1,4 +1,94 @@
-.componentContanier {
+.componentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cardContainer {
+    background-color: white;
+    box-shadow: -10px 10px 5px rgba(0, 0, 0, 0.5);
+    width: 450px;
+    height: 570px;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid #f0e6dc;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    transition: top 0.5s ease-in-out;
+    margin: 1em;
+}
+
+.cardImage {
+    width: 100%;
+    height: 55%;
+    background-color: #f0f0f0;
+}
+
+.cardImage img {
+    width: auto;
+    max-height: 100%;
+}
+
+.cardInfo {
+    padding: 10px;
+    color: #333;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cardName {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cardDetails {
+    text-align: left;
+}
+
+.cardDetails p,
+.cardDetails div {
+    margin: 5px 0;
+}
+
+.borderYellow {
+    border: 5px solid #ffcb05;
+}
+
+.borderBlue {
+    border: 5px solid #afbddc;
+}
+
+.borderGreen {
+    border: 5px solid #0D8D0E;
+}
+
+.borderGrey {
+    border: 5px solid #8D8D8E;
+}
+
+.borderRed {
+    border: 5px solid #d16f6a;
+}
+
+.borderPurple {
+    border: 5px solid #a285ad;
+}
+
+.borderPink {
+    border: 5px solid #FF76C2;
+}
+
+.borderGold {
+    border: 5px solid #FFE40E;
+}
+
+/* .componentContanier {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,4 +149,4 @@
 
 .borderRed {
     border: 5px solid red;
-}
+} */
