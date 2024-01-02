@@ -17,14 +17,17 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <div>
+    <div className={style.searchContainer}>
       <input
+        className={style.searchInput}
         type="search"
         onChange={handleChange}
         value={id}
         placeholder="Enter id or name"
       />
-      <button onClick={search}>ADD</button>
+      <button className={style.searchButton} onClick={search}>
+        ADD
+      </button>
     </div>
   );
 }

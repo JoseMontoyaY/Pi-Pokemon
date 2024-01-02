@@ -71,10 +71,12 @@ const HomeCards = () => {
   };
 
   return (
-    <div>
-      <Filter onSourceFilterChange={handleSourceFilterChange} />
-      <Sort />
-      <div className={style.container}>
+    <div className={style.container}>
+      <div className={style.filters}>
+        <Filter onSourceFilterChange={handleSourceFilterChange} />
+        <Sort />
+      </div>
+      <div className={style.pokemon}>
         {paginatedPokemons.map((pokemon) => (
           <HomeCard
             key={pokemon.id}
@@ -83,7 +85,10 @@ const HomeCards = () => {
           />
         ))}
       </div>
-      <Pagination />
+
+      <div className={style.pagination}>
+        <Pagination />
+      </div>
     </div>
   );
 };

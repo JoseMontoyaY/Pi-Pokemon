@@ -11,6 +11,7 @@ export default function Card({
   height,
   weight,
   image,
+  onRemovePokemon,
 }) {
   const borderClasses = [style.borderYellow, style.borderBlue, style.borderRed];
   const [borderClass, setBorderClass] = useState("");
@@ -22,10 +23,15 @@ export default function Card({
   useEffect(() => {
     setBorderClass(getRandomBorderClass());
   }, []);
-
+  const handleRemove = () => {
+    onRemovePokemon(id);
+  };
   return (
     <div className={style.shadowContainer}>
       <div className={`${style.cardContainer} ${borderClass}`}>
+        <button className={style.removeButton} onClick={handleRemove}>
+          X
+        </button>
         <p>
           <b>Name:</b> {name}
         </p>

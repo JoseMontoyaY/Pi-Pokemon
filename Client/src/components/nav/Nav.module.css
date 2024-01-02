@@ -1,3 +1,38 @@
 .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border: solid blueviolet;
+    /* background: linear-gradient(to right, #ff9569, #e92758); */
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 20px;
+    color: white;
+}
+
+.link {
+    margin: 0 2%;
+    background-color: #ffffff;
+    color: #e92758;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.link:hover,
+.link:focus {
+    background-color: #ffde59;
+}
+
+.pokeball {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
 }

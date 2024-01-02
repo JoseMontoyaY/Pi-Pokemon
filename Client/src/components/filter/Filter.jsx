@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setFilter, setCurrentPage } from "../../redux/actions/actions"; // Import setCurrentPage action
+import { setFilter, setCurrentPage } from "../../redux/actions/actions";
+import style from "./Filter.module.css";
 
 const Filter = ({ onSourceFilterChange }) => {
   const dispatch = useDispatch();
@@ -38,11 +39,11 @@ const Filter = ({ onSourceFilterChange }) => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <div>
         <label htmlFor="pokemon-type-filter">Filter by Type:</label>
         <select id="pokemon-type-filter" onChange={handleFilterChange}>
-          <option value="">All Types</option>
+          <option value="">All</option>
           {pokemonTypes.map((type) => (
             <option key={type} value={type}>
               {type}
@@ -53,7 +54,7 @@ const Filter = ({ onSourceFilterChange }) => {
       <div>
         <label htmlFor="pokemon-source-filter">Filter by Source:</label>
         <select id="pokemon-source-filter" onChange={handleSourceChange}>
-          <option value="">All Sources</option>
+          <option value="">All</option>
           <option value="api">API</option>
           <option value="db">Database</option>
         </select>

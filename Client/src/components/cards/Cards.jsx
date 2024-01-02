@@ -1,7 +1,7 @@
 import Card from "../card/Card";
 import style from "./Cards.module.css";
 
-export default function Cards({ pokemon }) {
+export default function Cards({ pokemon, onRemovePokemon }) {
   return (
     <div className={style.container}>
       {pokemon.map((pokemon) => (
@@ -16,6 +16,7 @@ export default function Cards({ pokemon }) {
           height={pokemon.height}
           weight={pokemon.weight}
           image={pokemon.image}
+          onRemovePokemon={onRemovePokemon}
         />
       ))}
     </div>

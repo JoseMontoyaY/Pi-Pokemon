@@ -1,3 +1,16 @@
 .container {
     border: solid red;
+
+}
+
+.home {
+    height: 70vh;
+
+}
+
+.pokemonLogo {
+    /* Maximum size the SVG can grow to */
+    width: 20vw;
+    /* Responsive width relative to the viewport width */
+    height: auto;
 }

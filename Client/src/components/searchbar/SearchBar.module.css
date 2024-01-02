@@ -1,0 +1,32 @@
+/* SearchBar.module.css */
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.searchInput {
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Avenir', sans-serif;
+}
+
+.searchButton {
+    background-color: #ffffff;
+    color: #e92758;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.searchButton:hover,
+.searchButton:focus {
+    background-color: #ffde59;
+}

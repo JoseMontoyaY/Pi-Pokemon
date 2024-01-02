@@ -47,6 +47,12 @@ function App() {
       alert(error.response.data.message);
     }
   };
+
+  // -----> REMOVE POKEMON FUNCTION <-----
+  function removePokemon(id) {
+    setPokemon(pokemon.filter((p) => p.id !== id));
+  }
+
   // -----> LOGIN FUNCTION <-----
 
   return (
@@ -55,7 +61,10 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/search" element={<Cards pokemon={pokemon} />} />
+        <Route
+          path="/search"
+          element={<Cards pokemon={pokemon} onRemovePokemon={removePokemon} />}
+        />
         <Route path="/detail/:pokemonId" element={<Detail />} />{" "}
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/about" element={<About />} />
